@@ -1,6 +1,8 @@
 import React, { useContext, useState } from "react";
 import { MyContext } from "../Context";
 import { Link, Redirect } from "react-router-dom";
+import "./LoginPage.css"; 
+
 export default function LoginPage({ history }) {
   const context = useContext(MyContext);
   const [data, setData] = useState({
@@ -11,63 +13,63 @@ export default function LoginPage({ history }) {
   if (context.isUserAuthenticated) {
     return <Redirect to="/" />;
   }
+
   return (
-    <div className="container m-auto align-items-center justify-content-center">
+    <div className="container d-flex align-items-center justify-content-center">
       <form
         onSubmit={(event) => context.login(event, data, history)}
-        className="mt-5"
+        className="login-form p-5 bg-light rounded shadow-lg"
       >
-        <div className="row">
-          <div className="form-group col-md-6 m-auto">
-            <p
-              id="login-error-header"
-              className="col-md-6 m-auto pb-2 font-weight-bold text-danger"
-            ></p>
-            <label htmlFor="inputUserName">Username</label>
-            <input
-              className="form-control"
-              type="text"
-              name="username"
-              value={data.username}
-              placeholder="Username"
-              onChange={(event) =>
-                setData({ ...data, username: event.target.value })
-              }
-              required
-            />
-          </div>
+        <h2 className="text-center mb-4 text-primary">Login</h2>
+        <div className="text-uppercase text-danger font-weight-bold"  id="login-error-header"></div>
+
+        {/* Username Input */}
+        <div className="mb-3">
+          <label htmlFor="inputUserName" className="form-label text-dark">
+            Username
+          </label>
+          <input
+            className="form-control"
+            type="text"
+            name="username"
+            value={data.username}
+            placeholder="Enter your username"
+            onChange={(event) =>
+              setData({ ...data, username: event.target.value })
+            }
+            required
+          />
         </div>
 
-        <div className="row">
-          <div className="form-group col-md-6 m-auto">
-            <label htmlFor="inputPassword">Password</label>
-            <input
-              className="form-control"
-              type="password"
-              name="password"
-              value={data.password}
-              placeholder="Password"
-              onChange={(event) =>
-                setData({ ...data, password: event.target.value })
-              }
-              required
-            />
-          </div>
+        {/* Password Input */}
+        <div className="mb-4">
+          <label htmlFor="inputPassword" className="form-label text-dark">
+            Password
+          </label>
+          <input
+            className="form-control"
+            type="password"
+            name="password"
+            value={data.password}
+            placeholder="Enter your password"
+            onChange={(event) =>
+              setData({ ...data, password: event.target.value })
+            }
+            required
+          />
         </div>
-        <div className="row">
-          <div className="col-md-6 m-auto">
-            <button type="submit" className="btn btn-primary px-5 my-3">
-              Login
-            </button>
-            <p>
-              If you have not created an account yet
-              <Link to="/register" className="text-decoration-none">
-                {" "}
-                Sign up{" "}
-              </Link>
-              first
-            </p>
-          </div>
+
+        {/* Submit Button */}
+        <div className="text-center text-dark">
+          <button type="submit" className="btn btn-primary w-100 mb-3">
+            Login
+          </button>
+          <p className="text-dark">
+            Don't have an account?
+            <Link to="/register" className="text-decoration-none ps-1">
+              Sign up
+            </Link>
+          </p>
         </div>
       </form>
     </div>

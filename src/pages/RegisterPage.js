@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import TextInput from "../components/TextInput";
 import { MyContext } from "../Context";
 import { Redirect, Link } from "react-router-dom";
+import "./RegisterPage.css"; // Import custom CSS for additional styling
 
 export default function RegisterPage({ history }) {
   const context = useContext(MyContext);
@@ -12,27 +13,26 @@ export default function RegisterPage({ history }) {
     password2: "",
   });
   const { username, email, password, password2 } = data;
+
   if (context.isUserAuthenticated) {
     return <Redirect to="/" />;
   }
 
   return (
-    <div className="container m-auto align-items-center justify-content-center">
+    <div className="container d-flex align-items-center justify-content-center min-vh-100">
       <form
         onSubmit={(event) => context.register(event, data, history)}
-        className="mt-5"
+        className="register-form p-5 bg-light rounded shadow-lg"
       >
-        <div className="row">
-          <div className="form-group col-md-6 m-auto pb-3" style={{paddingLeft: "10px"}}>
-            <ul
-              className="text-uppercase text-danger font-weight-bold"
-              id="register-message"
-            ></ul>
-          </div>
-        </div>
-        <div className="row">
+        <h2 className="text-center mb-4 text-primary">Register</h2>
+
+        {/* Error Message*/}
+        <ul className="text-uppercase text-danger font-weight-bold" id="register-message"></ul>
+
+        {/* Username Input */}
+        <div className="mb-3 text-dark">
           <TextInput
-            divClass="form-group col-md-6 m-auto"
+            divClass="form-group"
             htmlForLabel="inputForUsername"
             labelName="Username"
             inputClass="form-control"
@@ -40,16 +40,15 @@ export default function RegisterPage({ history }) {
             inputName="username"
             inputValue={username}
             inputPlaceHolder="Enter Username"
-            onChange={(event) =>
-              setData({ ...data, username: event.target.value })
-            }
+            onChange={(event) => setData({ ...data, username: event.target.value })}
             required={true}
           />
         </div>
 
-        <div className="row">
+        {/* Email Input */}
+        <div className="mb-3 text-dark">
           <TextInput
-            divClass="form-group col-md-6 m-auto"
+            divClass="form-group"
             htmlForLabel="inputForEmail"
             labelName="Email"
             inputClass="form-control"
@@ -57,16 +56,15 @@ export default function RegisterPage({ history }) {
             inputName="email"
             inputValue={email}
             inputPlaceHolder="Enter Email"
-            onChange={(event) =>
-              setData({ ...data, email: event.target.value })
-            }
+            onChange={(event) => setData({ ...data, email: event.target.value })}
             required={true}
           />
         </div>
 
-        <div className="row">
+        {/* Password Input */}
+        <div className="mb-3 text-dark">
           <TextInput
-            divClass="form-group col-md-6 m-auto"
+            divClass="form-group"
             htmlForLabel="inputPassword1"
             labelName="Password"
             inputClass="form-control"
@@ -74,44 +72,38 @@ export default function RegisterPage({ history }) {
             inputName="password"
             inputValue={password}
             inputPlaceHolder="Enter Password"
-            onChange={(event) =>
-              setData({ ...data, password: event.target.value })
-            }
+            onChange={(event) => setData({ ...data, password: event.target.value })}
             required={true}
           />
         </div>
 
-        <div className="row">
+        {/* Confirm Password Input */}
+        <div className="mb-4 text-dark">
           <TextInput
-            divClass="form-group col-md-6 m-auto"
+            divClass="form-group"
             htmlForLabel="inputPassword2"
-            labelName="Confirm"
+            labelName="Confirm Password"
             inputClass="form-control"
             inputType="password"
             inputName="password2"
             inputValue={password2}
             inputPlaceHolder="Confirm Password"
-            onChange={(event) =>
-              setData({ ...data, password2: event.target.value })
-            }
+            onChange={(event) => setData({ ...data, password2: event.target.value })}
             required={true}
           />
         </div>
 
-        <div className="row">
-          <div className="col-md-6 m-auto">
-            <button type="submit" className="btn btn-primary px-5 my-3">
-              Register
-            </button>
-            <p>
-              Already have an account ?
-              <Link to="/login" className="text-decoration-none">
-                {" "}
-                Login{" "}
-              </Link>
-              here
-            </p>
-          </div>
+        {/* Submit Button */}
+        <div className="text-center ">
+          <button type="submit" className="btn btn-primary w-100 mb-3">
+            Register
+          </button>
+          <p className="text-dark ">
+            Already have an account?
+            <Link to="/login" className="text-decoration-none ps-1">
+              Login here
+            </Link>
+          </p>
         </div>
       </form>
     </div>

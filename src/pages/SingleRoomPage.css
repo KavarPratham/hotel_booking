@@ -1,0 +1,25 @@
+.card {
+    background-color: #1f1f1f;
+  }
+  
+  .card .card-title {
+    color: #00bcd4;
+  }
+  
+  .card .card-text,
+  .list-group-item {
+    color: #bdbdbd;
+  }
+  
+  .card .list-group-item {
+    background-color: #1f1f1f;
+  }
+  
+  .list-group-item strong {
+    color: #ffffff;
+  }
+  
+  p.text-muted {
+    color: #757575;
+  }
+  

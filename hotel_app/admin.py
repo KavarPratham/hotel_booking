@@ -7,7 +7,8 @@ from .models import (
     Payment,
     CheckIn,
     CheckOut,
-    RoomDisplayImages
+    RoomDisplayImages,
+    Facility
 )
 
 
@@ -25,11 +26,16 @@ class RoomDisplayImagesStacked(admin.StackedInline):
 class RoomAdmin(admin.ModelAdmin):
     inlines = [RoomDisplayImagesStacked]
 
-    class Meta:
-        model = Room
+    list_display = ['__str__', 'is_booked', 'price_per_night', 'capacity', 'featured','meals_included']
+    
+    search_fields = ['title', 'room_slug']
+    
+    list_filter = ['is_booked', 'category', 'featured']
 
-    list_display = ['__str__', 'is_booked']    
+    filter_horizontal = ('special_facilities',) 
+
     actions = [update_room_is_booked_to_false]
+
 
 
 admin.site.register(Room, RoomAdmin)
@@ -40,3 +46,4 @@ admin.site.register(Payment)
 admin.site.register(CheckIn)
 admin.site.register(CheckOut)
 admin.site.register(RoomDisplayImages)
+admin.site.register(Facility)

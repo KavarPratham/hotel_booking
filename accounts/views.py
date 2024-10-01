@@ -14,7 +14,6 @@ class MyTokenObtainSerilizer(TokenObtainPairSerializer):
         refresh = self.get_token(self.user)
         data['refresh'] = str(refresh)
         data['access'] = str(refresh.access_token)
-        # Add your required response and other parameters here
         data['username'] = self.user.username
         data['user_id'] = self.user.pk
         data['is_admin'] = self.user.is_staff

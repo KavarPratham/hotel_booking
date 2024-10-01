@@ -2,13 +2,18 @@ from rest_framework import serializers
 from .models import (
     Room,
     Booking,
-    CheckIn
+    CheckIn,
+    Facility
 )
 
-
+class FacilitySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Facility
+        fields = ('name',)
+        
 class RoomSerializer(serializers.ModelSerializer):
     category_name = serializers.CharField(source='category.category_name')
-
+    special_facilities = FacilitySerializer(many=True)
     class Meta:
         model = Room
         fields = '__all__'
@@ -21,7 +26,7 @@ class BookingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Booking
         fields = '__all__'
-
+    
 
 class CheckinSerializer(serializers.ModelSerializer):
     room_id = serializers.IntegerField(source='room.pk')

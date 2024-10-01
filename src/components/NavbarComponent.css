@@ -1,0 +1,30 @@
+.nav-item-large {
+    font-size: 1.3rem;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+  }
+  
+.nav-item-large:hover {
+    color: black !important;
+    transition: color 0.3s ease, text-decoration 0.3s ease;
+  }
+.navbar {
+  position: relative;
+  z-index: 1000;
+}
+
+.nav-item-large {
+  font-size: 1.2rem;
+}
+
+.nav-link.active {
+  font-weight: bold;
+}
+#navbarNav ul li{
+  padding-left: 40px;
+}
+#navbarNav ul li #a{
+  font-size: 25px;
+}
+
+

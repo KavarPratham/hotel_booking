@@ -37,7 +37,7 @@ export default function HeroComponent({ data }) {
             >
               <h5>{data[0]?.title}</h5>
             </Link>
-            <p>$ {data[0]?.price_per_night}</p>
+            <p>₹ {data[0]?.price_per_night}</p>
           </div>
         </div>
 

@@ -96,7 +96,6 @@ class Context extends Component {
         ? event.target.checked
         : event.target.value;
 
-    // filterRooms is a call back function. This will be called only afer the state changes.
     this.setState(
       {
         [name]: value,
@@ -192,11 +191,8 @@ class Context extends Component {
         localStorage.setItem("is_admin", is_admin);
       })
       .catch((e) => {
-        document.getElementById("login-error-header").innerHTML =
+        document.getElementById("login-error-header").innerText =
           "Unauthorized Credentials";
-        setTimeout(function () {
-          document.getElementById("login-error-header").innerHTML = "";
-        }, 4000);
       });
   };
 

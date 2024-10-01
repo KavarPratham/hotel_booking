@@ -1,0 +1,107 @@
+# Query: $
+# ContextLines: 1
+
+24 results - 10 files
+
+Hotel-Reservation-Django-React\.gitignore:
+  35  *.py[cod]
+  36: *$py.class
+  37  
+
+Hotel-Reservation-Django-React\src\Context.js:
+  146    createAlert(message, type, id_of_alert_tag) {
+  147:     let alert_location = document.querySelector(`#${id_of_alert_tag}`);
+  148:     alert_location.setAttribute("class", `alert alert-${type}`);
+  149      let link = document.createElement("a");
+
+  157      alert_location.style.display = "block";
+  158:     let link_action = document.querySelector(`#${link_id}`);
+  159      link_action.addEventListener(
+
+  205        headers: {
+  206:         Authorization: `Bearer ${this.state.token}`,
+  207        },
+
+  230          "Content-Type": "application/json",
+  231:         Authorization: `Bearer ${this.state.token}`,
+  232        },
+
+  294          for(let e in error.response.data) {
+  295:           html += `<li>${error.response.data[e]}</li>`
+  296          }
+
+Hotel-Reservation-Django-React\src\serviceWorker.js:
+  18      window.location.hostname.match(
+  19:       /^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/
+  20      )
+
+  34      window.addEventListener('load', () => {
+  35:       const swUrl = `${process.env.PUBLIC_URL}/service-worker.js`;
+  36  
+
+Hotel-Reservation-Django-React\src\components\BannerComponent.js:
+   9          style={{
+  10:           backgroundImage: `url("${room.cover_image}")`,
+  11            backgroundRepeat: "no-repeat",
+
+  31                to={{
+  32:                 pathname: `/book/${room.id}`,
+  33                  state: { room },
+
+Hotel-Reservation-Django-React\src\components\BookingComponent.js:
+  52            "Content-Type": "application/json",
+  53:           Authorization: `Bearer ${token}`,
+  54          },
+
+  72              "common-message"
+  73:           ).innerHTML = `${response["response"]}`;
+  74            setTimeout(function () {
+
+  86            {/* <p className="success-message mb-2 font-weight-bold" id="message"></p> */}
+  87:           <Link to={`/single-room/${room.room_slug}`} role="button">
+  88              <button>Goto Room</button>
+
+Hotel-Reservation-Django-React\src\components\CarouselItems.js:
+   6      <div className="carousel-item" key={index}>
+   7:       <Link to={`/single-room/${d.room_slug}`}>
+   8          <img
+
+  15          <Link
+  16:           to={`/single-room/${d.room_slug}`}
+  17            className="text-decoration-none text-white"
+
+Hotel-Reservation-Django-React\src\components\HeroComponent.js:
+   9          data-target="#carouselExampleIndicators"
+  10:         data-slide-to={`${index + 1}`}
+  11          key={index}
+
+  25          <div className="carousel-item active">
+  26:           <Link to={`/single-room/${data[0]?.room_slug}`}>
+  27              <img
+
+  34              <Link
+  35:               to={`/single-room/${data[0]?.room_slug}`}
+  36                className="text-decoration-none text-white"
+
+  39              </Link>
+  40:             <p>₹ {data[0]?.price_per_night}</p>
+  41            </div>
+
+Hotel-Reservation-Django-React\src\components\Room.js:
+   6      <div className="card room">
+   7:       <Link to={`/single-room/${room_slug}`}>
+   8          <img className="card-img-top img-fluid room-image" src={cover_image} alt="" />
+
+  11          <h5 className="card-title">{title}</h5>
+  12:         <p className="card-text font-weight-bold">₹ {price_per_night}</p>
+  13        </div>
+
+Hotel-Reservation-Django-React\src\components\RoomsFilter.js:
+  64            <label htmlFor="customRange3">
+  65:             Room Cost Max ₹{price_per_night}
+  66            </label>
+
+Hotel-Reservation-Django-React\src\pages\SingleRommPage.js:
+  34                <h6>Information</h6>
+  35:               <p>Price ₹{room.price_per_night}</p>
+  36                <p>Size {room.room_size} Sqr Feet</p>

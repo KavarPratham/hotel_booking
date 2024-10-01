@@ -1,12 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-TYPE = (
-    ('A', 'Air Conditioned'),
-    ('NA', 'Non Air Conditioned')
-)
-
-
 def room_images_upload_path(instance, file_name):
     return f"{instance.room_slug}/room_cover/{file_name}"
 
@@ -14,18 +8,25 @@ def room_images_upload_path(instance, file_name):
 def room_display_images_upload_path(instance, file_name):
     return f"{instance.room.room_slug}/room_display/{file_name}"
 
+class Facility(models.Model):
+    name = models.CharField(max_length=50)
 
+    def __str__(self):
+        return self.name
+    
 class Room(models.Model):
     title = models.CharField(max_length=30)
     category = models.ForeignKey('Category', on_delete=models.CASCADE)
-    price_per_night = models.DecimalField(max_digits=8, decimal_places=3)
+    price_per_night = models.DecimalField(max_digits=8, decimal_places=2 )
     room_slug = models.SlugField()
     is_booked = models.BooleanField(default=False)
     capacity = models.IntegerField()
     room_size = models.CharField(max_length=5)
+    meals_included = models.BooleanField(default=False)
     cover_image = models.ImageField(upload_to=room_images_upload_path)
     featured = models.BooleanField(default=False)
-
+    details = models.TextField()
+    special_facilities = models.ManyToManyField(Facility)
     def __str__(self):
         return self.title
 

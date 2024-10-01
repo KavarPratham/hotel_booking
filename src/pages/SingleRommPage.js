@@ -3,96 +3,69 @@ import { MyContext } from "../Context";
 import Title from "../components/Title";
 import BannerComponent from "../components/BannerComponent";
 
-export default function SingleRommPage({ match }) {
+export default function SingleRoomPage({ match }) {
   const context = useContext(MyContext);
   const room = context.rooms.find(
     (room) => room.room_slug === match.params["room_slug"]
   );
+  console.log(room);
   if (!room) {
-    return <div>Eroror</div>;
+    return <div className="alert alert-danger">Error: Room not found.</div>;
   } else {
     return (
       <>
         <BannerComponent room={room} />
-        <div className="container my-5 align-items-center justify-content">
-          <Title title="Description" />
 
-          <div className="row">
-            <div className="col-md-6 m-auto">
-              <h6>Details</h6>
-              <p className="text-justify" style={{ width: "80%" }}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                sunt in culpa qui officia deserunt mollit anim id est laborum.
-              </p>
+        <div className="container my-5">
+          <Title title="Room Details" />
+
+          <div className="row mb-4">
+            <div className="col-md-6">
+              <div className="card border-0 shadow">
+                <div className="card-body">
+                  <h6 className="card-title text-primary text-uppercase">Details</h6>
+                  <p className="card-text text-justify text-dark">
+                    {room.details}
+                  </p>
+                </div>
+              </div>
             </div>
-            <div className="col-md-6 m-auto">
-              <h6>Information</h6>
-              <p>Price ${room.price_per_night}</p>
-              <p>Size {room.room_size} Sqr Feet</p>
-              <p>Capacity Maxium {room.capacity} People</p>
-              <p>Meals Included</p>
+
+            <div className="col-md-6">
+              <div className="card border-0 shadow">
+                <div className="card-body">
+                  <h6 className="card-title text-primary text-uppercase">Information</h6>
+                  <ul className="list-group list-group-flush">
+                    <li className="list-group-item text-dark">Price: <strong>₹ {room.price_per_night}</strong></li>
+                    <li className="list-group-item text-dark">Size: <strong>{room.room_size} sq ft</strong></li>
+                    <li className="list-group-item text-dark">Capacity: <strong>Maximum {room.capacity} people</strong></li>
+                    <li className="list-group-item text-dark">Meals Included: <strong>{room.meals_included ? "Yes" : "No"}</strong></li>
+                  </ul>
+                </div>
+              </div>
             </div>
           </div>
 
           <Title title="Facilities" />
 
-          <div className="row mt-5">
-            <div className="col-md-4">
-              <p>
-                eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                proident, sunt in culpa qui officia deserunt mollit anim id est
-                laborum.
-              </p>
-              <p>
-                eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                proident, sunt in culpa qui officia deserunt mollit anim id est
-                laborum.
-              </p>
-              <p>
-                eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                proident, sunt in culpa qui officia deserunt mollit anim id est
-                laborum.
-              </p>
-            </div>
-            <div className="col-md-4">
-              <p>
-                eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                proident, sunt in culpa qui officia deserunt mollit anim id est
-                laborum.
-              </p>
-              <p>
-                eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                proident, sunt in culpa qui officia deserunt mollit anim id est
-                laborum.
-              </p>
-              <p>
-                eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                proident, sunt in culpa qui officia deserunt mollit anim id est
-                laborum.
-              </p>
-            </div>
-            <div className="col-md-4">
-              <p>
-                eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                proident, sunt in culpa qui officia deserunt mollit anim id est
-                laborum.
-              </p>
-              <p>
-                eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                proident, sunt in culpa qui officia deserunt mollit anim id est
-                laborum.
-              </p>
-              <p>
-                eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                proident, sunt in culpa qui officia deserunt mollit anim id est
-                laborum.
-              </p>
-            </div>
+          <div className="row mt-4">
+            {room.special_facilities.length > 0 ? (
+              room.special_facilities.map((facility, index) => (
+                <div className="col-md-4" key={index}>
+                  <div className="card bg-light border-0 shadow-sm mb-4">
+                    <div className="card-body text-center">
+                      <p className="card-text text-dark font-weight-bold">
+                        {facility.name}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <div className="col-12">
+                <p className="text-muted">No special facilities available for this room.</p>
+              </div>
+            )}
           </div>
         </div>
       </>

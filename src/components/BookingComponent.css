@@ -1,0 +1,31 @@
+.booking-form {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+  }
+  
+  .booking-form .form-control {
+    border-radius: 5px;
+  }
+  
+  .booking-form .btn {
+    width: 100%;
+  }
+  
+  .booking-form .btn-secondary {
+    width: auto;
+  }
+  
+  .booking-form .btn-primary:hover {
+    background-color: #0056b3;
+  }
+  
+  .text-danger {
+    font-weight: bold;
+  }
+  
+  .text-center {
+    text-align: center;
+  }
+  

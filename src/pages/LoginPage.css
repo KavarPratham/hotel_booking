@@ -1,0 +1,33 @@
+.login-form {
+  width: 100%;
+  max-width: 400px;
+}
+
+.login-form h2 {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.btn-primary {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.form-label {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+#login-error-header {
+  font-size: 1rem;
+  text-align: center;
+}
+
+a {
+  font-weight: 600;
+  color: #007bff;
+}
+
+a:hover {
+  text-decoration: underline;
+}

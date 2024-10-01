@@ -4,6 +4,7 @@ import { MyContext } from "../Context";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import TextInput from "../components/TextInput";
+import "./BookingComponent.css"; // Custom CSS for further adjustments
 
 export default function BookingComponent({ room }) {
   const context = useContext(MyContext);
@@ -17,7 +18,7 @@ export default function BookingComponent({ room }) {
   });
 
   const isValid = () => {
-    const phone = /^\+?(88)?01[0-9]{9}/;
+    const phone = /^(\+91|91|0)?[6-9]\d{9}$/;
     if (!phone.test(data.phone_number)) {
       document.getElementById("phoneID").style.display = "block";
       document.getElementById("phone").innerHTML = "Invalid Phone Number";
@@ -35,6 +36,7 @@ export default function BookingComponent({ room }) {
     document.getElementById("checkout").innerHTML = "";
     return true;
   };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     let isFormValid = isValid();
@@ -46,6 +48,7 @@ export default function BookingComponent({ room }) {
       room: room.id,
       customer: user_id,
     };
+
     if (isFormValid) {
       const config = {
         headers: {
@@ -53,49 +56,44 @@ export default function BookingComponent({ room }) {
           Authorization: `Bearer ${token}`,
         },
       };
+
       axios
         .post("/hotel/book/", bookingDate, config)
         .then((response) => {
-          setData(
-            {
-              email: "",
-              phone_number: "",
-              checking_date: "",
-              checkout_date: "",
-            },
-            context.handleBook(room.id)
-          );
-          return response.data;
-        })
-        .then((response) => {
+          setData({
+            email: "",
+            phone_number: "",
+            checking_date: "",
+            checkout_date: "",
+          });
+          context.handleBook(room.id);
           document.getElementById(
             "common-message"
           ).innerHTML = `${response["response"]}`;
-          setTimeout(function () {
+          setTimeout(() => {
             document.getElementById("common-message").innerHTML = "";
           }, 3000);
         })
-        .catch((error) => {
-        });
+        .catch((error) => {});
     }
   };
+
   return (
-    <form className="booking-form mt-5" onSubmit={handleSubmit}>
+    <form className="booking-form mt-2 p-4 bg-white shadow-sm rounded col-md-6 m-auto" onSubmit={handleSubmit}>
       <div className="row">
         <div className="form-group col-md-6 m-auto text-center">
-          {/* <p className="success-message mb-2 font-weight-bold" id="message"></p> */}
           <Link to={`/single-room/${room.room_slug}`} role="button">
-            <button>Goto Room</button>
+            <button className="btn btn-dark mb-3">Go To Room</button>
           </Link>
         </div>
       </div>
-
-      <div className="row">
+  
+      <div className="row text-dark">
         <TextInput
           divClass="form-group col-md-6 m-auto"
           htmlForLabel="inputEmail"
           labelName="Email"
-          inputClass="form-control"
+          inputClass="form-control bg-light text-dark"
           inputType="email"
           inputName="email"
           inputValue={data.email}
@@ -104,13 +102,13 @@ export default function BookingComponent({ room }) {
           required={true}
         />
       </div>
-
-      <div className="row">
+  
+      <div className="row text-dark">
         <TextInput
           divClass="form-group col-md-6 m-auto"
           htmlForLabel="inputPhoneNumber"
           labelName="Phone Number"
-          inputClass="form-control"
+          inputClass="form-control bg-light text-dark"
           inputType="text"
           inputName="phone_number"
           inputValue={data.phone_number}
@@ -121,19 +119,19 @@ export default function BookingComponent({ room }) {
           required={true}
         />
       </div>
-
+  
       <div className="row" id="phoneID" style={{ display: "none" }}>
         <div className="form-group col-md-6 m-auto text-danger">
           <p id="phone"></p>
         </div>
       </div>
-
-      <div className="row">
+  
+      <div className="row text-dark">
         <TextInput
           divClass="form-group col-md-6 m-auto"
           htmlForLabel="inputCheckingDate"
           labelName="Checking Date"
-          inputClass="form-control"
+          inputClass="form-control bg-light text-dark"
           inputType="datetime-local"
           inputName="checking_date"
           inputValue={data.checking_date}
@@ -144,13 +142,13 @@ export default function BookingComponent({ room }) {
           required={true}
         />
       </div>
-
-      <div className="row">
+  
+      <div className="row text-dark">
         <TextInput
           divClass="form-group col-md-6 m-auto"
           htmlForLabel="inputCheckoutDate"
           labelName="Checkout Date"
-          inputClass="form-control"
+          inputClass="form-control bg-light text-dark"
           inputType="datetime-local"
           inputName="checkout_date"
           inputValue={data.checkout_date}
@@ -161,20 +159,22 @@ export default function BookingComponent({ room }) {
           required={true}
         />
       </div>
-
+  
+      {/* Checkout Date Validation Message */}
       <div className="row" id="checkoutID" style={{ display: "none" }}>
         <div className="form-group col-md-6 m-auto text-danger">
           <p id="checkout"></p>
         </div>
       </div>
-
+  
+      {/* Submit Button */}
       <div className="row">
         <div className="col-md-6 m-auto text-center">
-          <button type="submit" className="btn btn-primary px-5 my-3">
+          <button type="submit" className="btn btn-dark px-5 my-3">
             Book
           </button>
         </div>
       </div>
     </form>
-  );
+  );    
 }

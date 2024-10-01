@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export default function CarouselItems({ data }) {
   const items = data.map((d, index) => (
-    <div className="carousel-item" key={index}>
+    <div className="carousel-item " key={index}>
       <Link to={`/single-room/${d.room_slug}`}>
         <img
           className="d-block w-100 hero-image"
@@ -18,7 +18,7 @@ export default function CarouselItems({ data }) {
         >
           <h5>{d.title}</h5>
         </Link>
-        <p>$ {d.price_per_night}</p>
+        <p>₹  {d.price_per_night}</p>
       </div>
     </div>
   ));

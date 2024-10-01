@@ -5,39 +5,38 @@ export default function BannerComponent({ room }) {
   return (
     <>
       <div
-        className="jumbotron bannertext-white text-center"
+        className="jumbotron text-white text-center d-flex flex-column justify-content-center align-items-center"
         style={{
           backgroundImage: `url("${room.cover_image}")`,
           backgroundRepeat: "no-repeat",
-          backgroundSize: "100% 100%",
+          backgroundSize: "cover",
+          height: "50vh",
+          backgroundPosition: "center",
         }}
       >
-        <h1 className="display-4 font-weight-bold text-white">{room.title}</h1>
-        {/* <p className="lead">
-          This is a simple hero unit, a simple jumbotron-style component for
-          calling extra attention to featured content or information.
-        </p> */}
-        <hr className="my-4" />
-        {/* <p>
-          It uses utility classNamees for typography and spacing to space
-          content out within the larger container.
-        </p> */}
+        {/* Room Title */}
+        <h1 className="display-4 font-weight-bold text-white mb-3">
+          {room.title}
+        </h1>
+
+        {/* Divider */}
+        <hr className="my-3 bg-light" style={{ width: "50%" }} />
+
+        {/* Room Availability/Booking */}
         {room.is_booked ? (
-          <p className="lead btn btn-danger btn-lg">Reserved</p>
+          <p className="lead btn btn-danger btn-lg px-5 py-2">Reserved</p>
         ) : (
           <p className="lead">
-            (
             <Link
               to={{
                 pathname: `/book/${room.id}`,
                 state: { room },
               }}
-              className="btn btn-primary btn-lg"
+              className="btn btn-primary btn-lg px-5 py-2"
               role="button"
             >
               Book Room
             </Link>
-            )
           </p>
         )}
       </div>

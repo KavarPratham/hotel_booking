@@ -15,32 +15,35 @@ export default function RoomsFilter() {
     price_per_night,
     maxPrice,
     minPrice,
-    // minRoomSize,
-    // maxRoomSize,
     reserved,
   } = contextData;
 
   let roomTypes = ["all", ...getUniqueValues(rooms, "category_name")];
   const selectTypes = roomTypes.map((cat, index) => (
     <option key={index} value={cat}>
-      {cat}
+      {cat.charAt(0).toUpperCase() + cat.slice(1)}
     </option>
   ));
 
   let capacityValues = [...getUniqueValues(rooms, "capacity")];
-  const sleectCapacity = capacityValues.sort().map((cap, index) => (
+  const selectCapacity = capacityValues.sort().map((cap, index) => (
     <option key={index} value={cap}>
       {cap}
     </option>
   ));
+
   return (
-    <>
-      <form className="rooms-filter">
+    <div className="filter-container container-fluid py-4">
+      <h4 className="filter-title text-center mb-4 text-white">Filter Rooms</h4>
+      <form className="rooms-filter p-4 rounded shadow bg-dark text-light">
+        {/* Category Filter */}
         <div className="form-group">
-          <label htmlFor="inputCategory">Category</label>
+          <label htmlFor="inputCategory" className="font-weight-bold">
+            Category
+          </label>
           <select
             id="inputCategory"
-            className="form-control"
+            className="form-control bg-dark text-light border-light"
             name="category_name"
             value={category_name}
             onChange={handleChange}
@@ -48,27 +51,33 @@ export default function RoomsFilter() {
             {selectTypes}
           </select>
         </div>
+
+        {/* Capacity Filter */}
         <div className="form-group">
-          <label htmlFor="inputCapacity">Capacity</label>
+          <label htmlFor="inputCapacity" className="font-weight-bold">
+            Capacity
+          </label>
           <select
             id="inputCapacity"
-            className="form-control"
+            className="form-control bg-dark text-light border-light"
             name="capacity"
             value={capacity}
             onChange={handleChange}
           >
-            {sleectCapacity}
+            {selectCapacity}
           </select>
         </div>
+
+        {/* Price Filter */}
         <div className="form-group">
-          <label htmlFor="customRange3">
-            Room Cost Max ${price_per_night}
+          <label htmlFor="customRange3" className="font-weight-bold">
+            Room Cost Max: ₹{price_per_night}
           </label>
           <input
             name="price_per_night"
             value={price_per_night}
             type="range"
-            className="custom-range pt-2"
+            className="custom-range"
             min={minPrice}
             max={maxPrice}
             step="1.0"
@@ -77,33 +86,8 @@ export default function RoomsFilter() {
           />
         </div>
 
-        {/* <div className="form-group">
-          <label htmlFor="minRoomsSize">Room Size Min</label>
-          <input
-            name="minRoomSize"
-            value={minRoomSize}
-            type="number"
-            className="form-control"
-            id="minRoomSize"
-            onChange={handleChange}
-            // style={{"width": "100px"}}
-          />
-        </div> */}
-
-        {/* <div className="form-group">
-          <label htmlFor="maxRoomSize">Room Size Max</label>
-          <input
-            name="maxRoomSize"
-            value={maxRoomSize}
-            type="number"
-            className="form-control"
-            id="maxRoomSize"
-            onChange={handleChange}
-            // style={{"width": "100px"}}
-          />
-        </div> */}
-
-        <div className="form-check pt-4">
+        {/* Availability Filter */}
+        <div className="form-check">
           <input
             name="reserved"
             checked={reserved}
@@ -112,13 +96,11 @@ export default function RoomsFilter() {
             id="reserved"
             onChange={handleChange}
           />
-          <label className="form-check-label" htmlFor="exampleCheck1">
-            Available
+          <label className="form-check-label font-weight-bold text-light" htmlFor="reserved">
+            Only show available rooms
           </label>
         </div>
-
-        {/* <div className="border">Facility</div> */}
       </form>
-    </>
+    </div>
   );
 }
